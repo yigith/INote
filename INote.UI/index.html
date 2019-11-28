@@ -5,10 +5,11 @@
     <title></title>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/fontawesome-all.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-route.min.js"></script>
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="indexCtrl">
     <a href="#!/">Anasayfa</a>
     <a href="#!login">GirişYap</a>
     <a href="#!register">Kayıt Ol</a>
@@ -17,7 +18,7 @@
 
     <div ng-view></div>
 
-    <script src="Scripts/jquery-3.4.1.min.js"></script>
+
     <script src="Scripts/bootstrap.bundle.min.js"></script>
     <script src="index.js"></script>
 </body>
