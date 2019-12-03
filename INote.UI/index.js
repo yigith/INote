@@ -1,4 +1,4 @@
-﻿var apiUrl = "http://localhost:55491/";
+﻿var apiUrl = "https://inoteapi.kod.fun/";
 
 var app = angular.module("myApp", ["ngRoute"]);
 
@@ -94,6 +94,7 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
     }
 
     $scope.selectedNote = null;
+
     $scope.activeNote = {
         Id: 0,
         Title: "",
@@ -116,8 +117,23 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
         );
     };
 
+    $scope.newNote = function (e) {
+        if(e)
+            e.preventDefault();
+
+        $scope.selectedNote = null;
+
+        $scope.activeNote = {
+            Id: 0,
+            Title: "",
+            Content: ""
+        };
+    };
+
     $scope.showNote = function (e, note) {
-        e.preventDefault();
+        if(e)
+            e.preventDefault();
+
         $scope.activeNote = angular.copy(note);
         $scope.selectedNote = note;
     };
@@ -138,10 +154,34 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
                 },
             );
         }
+        else {
+            $http.post(apiUrl + "api/Notes/PostNote", $scope.activeNote, $scope.requestConfig()).then(
+                function (response) {
+                    $scope.notes.push(response.data);
+                    $scope.showNote(null, response.data);
+                },
+                function (response) {
+
+                },
+            );
+        }
     };
 
     $scope.deleteNote = function (e) {
+        e.preventDefault();
 
+        if ($scope.selectedNote) {
+            $http.delete(apiUrl + "api/Notes/DeleteNote/" + $scope.selectedNote.Id, $scope.requestConfig()).then(
+                function (response) {
+                    var i = $scope.notes.indexOf($scope.selectedNote);
+                    $scope.notes.splice(i, 1);
+                    $scope.newNote();
+                },
+                function (response) {
+
+                },
+            );
+        }
     };
 
     $scope.noteActiveClass = function (id) {

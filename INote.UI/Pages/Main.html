@@ -4,14 +4,19 @@
     </div>
 </div>
 
-<div ng-show="!isLoading">
+<div ng-show="!isLoading" class="h-100">
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-md-3">
 
                 <div class="list-group mt-4">
-                    <h5 class="list-group-item list-group-item-light bg-light">Yazılarım</h5>
+                    <div class="list-group-item list-group-item-light bg-light d-flex align-items-end">
+                        <h5>Yazılarım</h5>
+                        <a ng-click="newNote($event)" href="#" class="btn btn-success ml-auto">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
 
                     <a href="#" class="list-group-item list-group-item-action"
                        ng-repeat="note in notes" ng-click="showNote($event, note)" ng-class="noteActiveClass(note.Id)">
@@ -19,22 +24,24 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9 h-100 py-4 pr-4">
 
-                <div class="card mt-4">
-                    <div class="card-body">
+                <div class="card h-100">
+                    <div class="card-body h-100 d-flex flex-column">
                         <div class="form-group">
                             <input ng-model="activeNote.Title" type="text" class="form-control" placeholder="Başlık" />
                         </div>
-                        <div class="form-group">
-                            <textarea ng-model="activeNote.Content" type="text" class="form-control" rows="10" placeholder="Bir şeyler yazın.."></textarea>
+                        <div class="form-group flex-grow-1">
+                            <textarea ng-model="activeNote.Content" type="text" class="form-control h-100" placeholder="Bir şeyler yazın.."></textarea>
                         </div>
-                        <button ng-click="saveNote($event)" type="button" class="btn btn-primary">
-                            Kaydet
-                        </button>
-                        <button ng-click="deleteNote($event)" type="button" class="btn btn-danger">
-                            Sil
-                        </button>
+                        <div>
+                            <button ng-click="saveNote($event)" ng-disabled="!activeNote.Title" type="button" class="btn btn-primary">
+                                Kaydet
+                            </button>
+                            <button ng-click="deleteNote($event)" ng-disabled="!selectedNote" type="button" class="btn btn-danger">
+                                Sil
+                            </button>
+                        </div>
                     </div>
                 </div>
 
