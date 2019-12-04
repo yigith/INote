@@ -205,8 +205,8 @@ app.controller("loginCtrl", function ($scope, $http, $location, $timeout, $httpP
 
     $scope.user = {
         grant_type: "password",
-        username: "yigith1@gmail.com",
-        password: "Ankara1."
+        username: "",
+        password: ""
     };
 
     $scope.isRememberMe = false;
@@ -255,9 +255,9 @@ app.controller("registerCtrl", function ($scope, $http) {
     $scope.successMessage = "";
 
     $scope.user = {
-        Email: "test@gmail.com",
-        Password: "Ankara1.",
-        ConfirmPassword: "Ankara1."
+        Email: "",
+        Password: "",
+        ConfirmPassword: ""
     };
 
     $scope.register = function (e) {
